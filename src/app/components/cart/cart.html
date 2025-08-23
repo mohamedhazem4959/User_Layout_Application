@@ -1,0 +1,33 @@
+<body class="cart-page">
+    <div class="cart-page__container">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th class="cart-table__header">Product Name</th>
+                    <th class="cart-table__header">Price</th>
+                    <th class="cart-table__header">Quantity</th>
+                    <th class="cart-table__header">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="cart-table__row">
+                    <td class="cart-table__cell">Product Name 1</td>
+                    <td class="cart-table__cell">$49.99</td>
+                    <td class="cart-table__cell">1</td>
+                    <td class="cart-table__cell"><a class="cart-table__remove" href="#">Remove</a></td>
+                </tr>
+                <tr class="cart-table__row">
+                    <td class="cart-table__cell">Product Name 2</td>
+                    <td class="cart-table__cell">$59.99</td>
+                    <td class="cart-table__cell">2</td>
+                    <td class="cart-table__cell"><a class="cart-table__remove" href="#">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="cart-summary">
+            <p class="cart-summary__item">Total Quantity: 3</p>
+            <p class="cart-summary__item">Total Price: $169.97</p>
+            <a class="cart-summary__button" routerLink="/order">Proceed to Order</a>
+        </div>
+    </div>
+</body>

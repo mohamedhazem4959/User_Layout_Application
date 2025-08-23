@@ -1,0 +1,25 @@
+<header class="header">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <div class="header__left">
+        <div class="header__logo">
+            <a href="/">Clothify</a>
+        </div>
+        <nav class="header__main-nav">
+            <a class="header__link" href="/">Home</a>
+            <a class="header__link" (click)="selectedCategory('men')">Men</a>
+            <a class="header__link" (click)="selectedCategory('women')">Women</a>
+            <a class="header__link" (click)="selectedCategory('kids')">Kids</a>
+        </nav>
+    </div>
+
+    <nav class="header__nav">
+        <div class="header__search">
+            <input type="checkbox" id="search-toggle" class="search-toggle">
+            <label for="search-toggle" class="search-icon">🔍</label>
+            <input type="text" class="search-input" placeholder="Search products...">
+        </div>
+        <a class="header__link" href="/login">Login</a>
+        <a class="register" href="/register">Register</a>
+        <a class="header__cart" href="/cart">🛒</a>
+    </nav>
+</header>
