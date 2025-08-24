@@ -6,9 +6,9 @@
         </div>
         <nav class="header__main-nav">
             <a class="header__link" href="/">Home</a>
-            <a class="header__link" (click)="selectedCategory('men')">Men</a>
-            <a class="header__link" (click)="selectedCategory('women')">Women</a>
-            <a class="header__link" (click)="selectedCategory('kids')">Kids</a>
+            <a class="header__link" routerLink="/category/men">Men</a>
+            <a class="header__link" routerLink="/category/women">Women</a>
+            <a class="header__link" routerLink="/category/kids">Kids</a>
         </nav>
     </div>
 
@@ -16,7 +16,8 @@
         <div class="header__search">
             <input type="checkbox" id="search-toggle" class="search-toggle">
             <label for="search-toggle" class="search-icon">🔍</label>
-            <input type="text" class="search-input" placeholder="Search products...">
+            <input type="text" class="search-input" placeholder="Search products..." [(ngModel)]="searchValue">
+            <button class="search-btn" (click)="onSearch()">Search</button>
         </div>
         <a class="header__link" href="/login">Login</a>
         <a class="register" href="/register">Register</a>

@@ -14,13 +14,17 @@ export class ProductsService {
   private url = environment.apiUrl + '/product' + '/products';
   private Base_URL = environment.apiUrl;
 
-  getAllProducts(page: number = 1): Observable<IProductsRes> {
-    return this._http.get<IProductsRes>(`${this.url}?page=${page}`).pipe(
-      catchError(error => {
-        console.error('HTTP Error:', error);
-        throw error
-      })
-    )
+  getAllProducts(page: number = 1, categoryRoute?: string): Observable<IProductsRes> {
+    if (categoryRoute) {
+      return this._http.get<IProductsRes>(`${this.Base_URL}/product/filterd/category/${categoryRoute}?page=${page}`)
+    } else {
+      return this._http.get<IProductsRes>(`${this.url}?page=${page}`).pipe(
+        catchError(error => {
+          console.error('HTTP Error:', error);
+          throw error
+        })
+      )
+    }
   }
   getProductsByPrice(minPrice: number, maxPrice: number, page: number = 1): Observable<IProductsRes> {
     return this._http.get<IProductsRes>(
@@ -30,5 +34,4 @@ export class ProductsService {
       throw error
     }))
   }
-
 }

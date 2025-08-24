@@ -1,63 +1,62 @@
 <body class="home-page">
-    <div class="home-page__container">
-        <aside class="home-page__sidebar">
-            <ul class="categories">
-                <li class="categories__item">
-                    <input type="checkbox" class="categories__toggle" id="cat-men">
-                    <h2 class="category-header">Categories</h2>
-                    <label class="categories__label" for="cat-men">Men</label>
-
-                    <ul class="categories__sub">
-                        <li class="categories__sub-item">Shirts</li>
-                        <li class="categories__sub-item">Pants</li>
-                        <li class="categories__sub-item">Shoes</li>
-                    </ul>
-                </li>
-                <li class="categories__item">
-                    <input type="checkbox" class="categories__toggle" id="cat-women">
-                    <label class="categories__label" for="cat-women">Women</label>
-                    <ul class="categories__sub">
-                        <li class="categories__sub-item">Dresses</li>
-                        <li class="categories__sub-item">Tops</li>
-                        <li class="categories__sub-item">Skirts</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <form class="filter-card">
-                <h3 class="filter-card__title">Filters</h3>
-                <input type="number" class="filter-card__input" #min placeholder="Min Price">
-                <input type="number" class="filter-card__input" #max placeholder="Max Price">
-                <button type="button" class="filter-card__button" (click)="filterByPrice(+min.value,+max.value)">Filter</button>
-                <!--  (click)="filterByPrice(+min.value,+max.value)" -->
-            </form>
-        </aside>
-
-                <main class="home-page__main">
-            <div class="product-grid">
-                @if (products?.length) {
-                @for (product of products; track product._id) {
-                <div class="product-grid">
-                    <div class="product-grid__item">
-                        <img [src]="staticUrl + '/' + product.image" alt="{{ product.name }}"
-                            class="product-grid__image">
-                        <h4 class="product-grid__name">{{ product.name }}</h4>
-                        <p class="product-grid__price">Price: {{ product.price }}</p>
-                        <a class="view-details" [routerLink]="['/product-details' , product.route]">view details</a>
-                    </div>
-                </div>
+  <div class="home-page__container">
+    <aside class="home-page__sidebar">
+      <ul class="categories">
+        @if (currentCategory) {
+          <li class="categories__item">
+            <h2 class="category-header">{{ currentCategory }} categories</h2>
+            <input
+              type="checkbox"
+              class="categories__toggle"
+              [id]="getCategoryCheckboxId()"
+            >
+            <label
+              class="categories__label"
+              [for]="getCategoryCheckboxId()"
+            >
+              {{currentCategory}}
+            </label>
+            @if (subCategories.length) {
+              <ul class="categories__sub">
+                @for (sub of subCategories; track sub._id) {
+                  <a class="categories__sub-item" [routerLink]="['/category', sub.route]">{{ sub.name }}</a>
                 }
-                } @else {
-                <p>Loading products...</p>
-                }
-            </div>
-            <!-- Add more items as needed -->
-            <div class="pagination">
-                <button class="pagination__button" [disabled]="!hasPrevPage" (click)="prevPage()">Previous</button>
-                <button class="pagination__button" [disabled]="!hasNextPage" (click)="nextPage()">Next</button>
-                <!-- <span class="page" >Page {{ currentPage }} of {{ totalPages }}</span> -->
-            </div>
-        </main>
+              </ul>
+            } 
+          </li>
+        } @else {
+          <p class="Home-side">Home</p>
+        }
+      </ul>
 
-    </div>
+      <form class="filter-card">
+        <h3 class="filter-card__title">Filters</h3>
+        <input type="number" class="filter-card__input" #min placeholder="Min Price">
+        <input type="number" class="filter-card__input" #max placeholder="Max Price">
+        <button type="button" class="filter-card__button" (click)="filterByPrice(+min.value, +max.value)">Filter</button>
+      </form>
+    </aside>
+
+    <main class="home-page__main">
+      <div class="product-grid">
+        @if (displayedProducts?.length) {
+          @for (product of displayedProducts; track product._id) {
+            <div class="product-grid__item">
+              <img [src]="staticUrl + '/' + product.image" alt="{{ product.name }}" class="product-grid__image">
+              <h4 class="product-grid__name">{{ product.name }}</h4>
+              <p class="product-grid__price">Price: {{ product.price }}</p>
+              <a class="view-details" [routerLink]="['/product-details', product.route]">View Details</a>
+            </div>
+          }
+        } @else {
+          <p>No products found.</p>
+        }
+      </div>
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button class="pagination__button" [disabled]="!hasPrevPage" (click)="prevPage()">Previous</button>
+        <!-- <span class="page">Page {{ currentPage }} of {{ totalPages }}</span> -->
+        <button class="pagination__button" [disabled]="!hasNextPage" (click)="nextPage()">Next</button>
+      </div>
+    </main>
+  </div>
 </body>

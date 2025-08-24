@@ -1,33 +1,64 @@
-<!-- <body class="auth-page auth-page--register">
-    <div class="auth-page__container">
-        <div class="auth-form auth-form--register">
-            <h2 class="auth-form__welcome">Create Your Account</h2>
-            <h3 class="auth-form__title">Register</h3>
-            
-            <input type="text" class="auth-form__input" placeholder="Full Name">
-            <input type="email" class="auth-form__input" placeholder="Email">
-            <input type="password" class="auth-form__input" placeholder="Password">
-            <input type="password" class="auth-form__input" placeholder="Confirm Password">
-            
-            <button class="auth-form__button">Register</button>
-        </div>
-    </div>
-</body> -->
-
-
 <body class="auth-page auth-page--register">
     <div class="auth-page__container">
         <div class="auth-form auth-form--register">
-            <h2 class="auth-form__welcome">Create Your Account</h2>
-            <h3 class="auth-form__title">Register</h3>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+                <h2 class="auth-form__welcome">Create Your Account</h2>
+                <h3 class="auth-form__title">Register</h3>
 
 
-            <input type="text" class="auth-form__input" placeholder="Full Name">
-            <input type="email" class="auth-form__input" placeholder="Email">
-            <input type="password" class="auth-form__input" placeholder="Password">
-            <input type="password" class="auth-form__input" placeholder="Confirm Password">
+                <input type="text" class="auth-form__input" placeholder="Full Name" formControlName="name"
+                    [class.is-invalid]="registerForm.get('name')?.touched && (registerForm.get('name')?.invalid || serverErrors.name)">
 
-            <button class="auth-form__button">Register</button>
+                <div class="errorMsg"
+                    *ngIf="registerForm.get('name')?.touched && (registerForm.get('name')?.invalid) || serverErrors">
+                    {{getNameError()}}</div>
+
+                <input type="text" class="auth-form__input" placeholder="Phone Number" formControlName="phoneNumber"
+                    [class.is-invalid]="registerForm.get('phoneNumber')?.touched && (registerForm.get('phoneNumber')?.invalid || serverErrors.name)">
+
+                <div class="errorMsg"
+                    *ngIf="registerForm.get('phoneNumber')?.touched && (registerForm.get('phoneNumber')?.invalid) || serverErrors">
+                    {{getPhoneNumberError()}}</div>
+
+
+                <input type="email" class="auth-form__input" placeholder="Email" formControlName="email"
+                    [class.is-invalid]="registerForm.get('email')?.touched && (registerForm.get('email')?.invalid || serverErrors.name)">
+
+                <div class="errorMsg"
+                    *ngIf="registerForm.get('email')?.touched && (registerForm.get('email')?.invalid) || serverErrors">
+                    {{getEmailError()}}</div>
+
+                    <input type="password" class="auth-form__input" placeholder="Password" formControlName="password"
+                        [class.is-invalid]="registerForm.get('password')?.touched && (registerForm.get('password')?.invalid || serverErrors.name)">
+
+                    <div class="errorMsg"
+                        *ngIf="registerForm.get('password')?.touched && (registerForm.get('password')?.invalid) || serverErrors">
+                        {{getPasswordError()}}</div>
+
+                    <input type="password" class="auth-form__input" placeholder="Confirm Password"
+                        formControlName="confirmPassword"
+                        [class.is-invalid]="registerForm.get('confirmPassword')?.touched && (registerForm.get('confirmPassword')?.invalid || serverErrors.name)">
+
+                    <div class="errorMsg"
+                        *ngIf="registerForm.get('confirmPassword')?.touched && (registerForm.get('confirmPassword')?.invalid) || serverErrors">
+                        {{getConfirmPasswordError()}}</div>
+
+                    <button class="auth-form__button" [disabled]="registerForm.invalid">Register</button>
+
+                    <div class="successMsg" *ngIf="successMessage">
+                        {{ successMessage }}
+                    </div>
+
+                    <div class="errorMsg" *ngIf="serverErrors.general">
+                        {{ serverErrors.general }}
+                    </div>
+
+                    <div class="auth-form__links">
+                        <a [routerLink]="['/login']">Already have an account? Log in</a>
+                    </div>
+
+            </form>
         </div>
     </div>
 </body>

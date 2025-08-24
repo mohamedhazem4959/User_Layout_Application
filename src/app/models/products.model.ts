@@ -1,14 +1,20 @@
 export interface IProducts {
-    _id:string;
+    _id: string;
     name: string;
     stock: number;
     description: string;
     price: number;
-    category: string;
+    category: {
+        _id: string;
+        name: string;
+        description: string;
+        parentCategory: string | null;
+        route: string;
+    };
+    image: string;
     isDeleted: boolean;
     isActive: boolean;
     route: string;
-    image: string;
 }
 
 export interface IProductsRes {
@@ -25,4 +31,11 @@ export interface IProductsRes {
         prevPage: number | null;
         result: IProducts[];
     };
+    subCategories: {
+        _id: string;
+        name: string;
+        description: string;
+        parentCategory: string | null;
+        route: string
+    }[];
 }

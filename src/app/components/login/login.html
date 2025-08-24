@@ -1,4 +1,4 @@
-<body class="auth-page auth-page--login">
+<!-- <body class="auth-page auth-page--login">
     <div class="auth-page__container">
         <div class="auth-form auth-form--login">
             <h2 class="auth-form__welcome">Welcome Back</h2>
@@ -11,4 +11,74 @@
             </div>
         </div>
     </div>
+</body> -->
+
+<!-- <body class="auth-page auth-page--login">
+    <div class="auth-page__container">
+        <form class="auth-form auth-form--login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h2 class="auth-form__welcome">Welcome Back</h2>
+            <h3 class="auth-form__title">Login</h3>
+
+            <input type="email" class="auth-form__input" placeholder="Email" required formControlName="email" [class.is-invalid]="loginForm.get('email')?.touched && (loginForm.get('email')?.invalid)">
+            <div class="errorMsg" *ngIf="getEmailError()">
+                {{getEmailError()}}
+            </div>
+
+            
+            <input type="password" class="auth-form__input" placeholder="Password" required formControlName="password" [class.is-invalid]="loginForm.get('password')?.touched && (loginForm.get('password')?.invalid)">
+            <div class="errorMsg" *ngIf="getPasswordError()">
+                {{getPasswordError()}}
+            </div>
+
+            <button class="auth-form__button" [disabled]="loginForm.invalid">Login</button>
+
+            <div class="auth-form__links">
+                <a href="#">Create Account</a>
+            </div>
+        </form>
+    </div>
+</body> -->
+
+
+
+
+<body class="auth-page auth-page--login">
+  <div class="auth-page__container">
+    <form class="auth-form auth-form--login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h2 class="auth-form__welcome">Welcome Back</h2>
+      <h3 class="auth-form__title">Login</h3>
+
+      <input
+        type="email"
+        class="auth-form__input"
+        placeholder="Email"
+        formControlName="email"
+        [class.is-invalid]="loginForm.get('email')?.touched && (loginForm.get('email')?.invalid || serverErrors.email)"
+      />
+      <div class="errorMsg" *ngIf="loginForm.get('email')?.touched && (loginForm.get('email')?.invalid || serverErrors.email)">
+        {{ getEmailError() }}
+      </div>
+
+      <input
+        type="password"
+        class="auth-form__input"
+        placeholder="Password"
+        formControlName="password"
+        [class.is-invalid]="loginForm.get('password')?.touched && (loginForm.get('password')?.invalid || serverErrors.password)"
+      />
+      <div class="errorMsg" *ngIf="loginForm.get('password')?.touched && (loginForm.get('password')?.invalid || serverErrors.password)">
+        {{ getPasswordError() }}
+      </div>
+
+      <button class="auth-form__button" [disabled]="loginForm.invalid">Login</button>
+
+      <div class="errorMsg" *ngIf="serverErrors.general">
+        invalid email or password
+      </div>
+
+      <div class="auth-form__links">
+        <a [routerLink]="['/register']">Create Account</a>
+      </div>
+    </form>
+  </div>
 </body>

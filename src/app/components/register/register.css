@@ -78,3 +78,32 @@ body.auth-page {
 .auth-form__links a:hover {
     text-decoration: underline;
 }
+
+.errorMsg {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+
+.successMsg {
+  color: green;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.auth-form__button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.auth-form__links {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.auth-form__links a {
+  color: #007bff;
+  text-decoration: none;
+}

@@ -39,6 +39,8 @@ body.home-page {
 }
 
 .category-header {
+    font-family: robot;
+    font-size: 26px;
     display: block;
     text-align: center;
     margin-bottom: 10px;
@@ -200,4 +202,10 @@ body.home-page {
 .page {
     justify-content: end;
     display: block;
+}
+
+.Home-side {
+    font-family: robot;
+    text-align: center;
+    font-size: 40px;
 }

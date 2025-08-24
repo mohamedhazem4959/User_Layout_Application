@@ -1,80 +1,112 @@
 body.auth-page {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: url('https://example.com/cloth-background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #455A64;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-        }
-        .auth-page__container {
-            margin-top: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-        }
-        .auth-form {
-            width: 400px;
-            background-color: rgba(247, 247, 247, 0.9);
-            padding: 30px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            border-radius: 10px;
-            text-align: center;
-        }
-        .auth-form__welcome {
-            color: #263238;
-            margin-bottom: 5px;
-            font-size: 1.2em;
-        }
-        .auth-form__title {
-            color: #263238;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }
-        .auth-form__input {
-            display: block;
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 2px solid #B0BEC5;
-            background-color: #FFFFFF;
-            color: #455A64;
-            border-radius: 6px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-        }
-        .auth-form__input:focus {
-            border-color: #263238;
-            outline: none;
-        }
-        .auth-form__button {
-            background-color: #263238;
-            color: #FFFFFF;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            cursor: pointer;
-            border-radius: 6px;
-            font-size: 1.1em;
-            transition: background-color 0.3s;
-        }
-        .auth-form__button:hover {
-            background-color: #1A252A;
-        }
-        .auth-form__links {
-            margin-top: 15px;
-            font-size: 0.9em;
-        }
-        .auth-form__links a {
-            color: #263238;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .auth-form__links a:hover {
-            text-decoration: underline;
-        }
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('https://example.com/cloth-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #455A64;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.auth-page__container {
+
+    margin-top: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.auth-form {
+    width: 400px;
+    background-color: rgba(247, 247, 247, 0.9);
+    padding: 30px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.auth-form__welcome {
+    color: #263238;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.auth-form__title {
+
+    color: #263238;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.auth-form__input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 2px solid #B0BEC5;
+    background-color: #FFFFFF;
+    color: #455A64;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.auth-form__input:focus {
+    border-color: #263238;
+    outline: none;
+}
+
+.auth-form__button {
+    background-color: #263238;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+
+.auth-form__button:hover {
+    background-color: #1A252A;
+}
+
+.auth-form__button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.auth-form__links {
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.auth-form__links a {
+    color: #263238;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.auth-form__links a:hover {
+    text-decoration: underline;
+}
+
+.errorMsg {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.general-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}

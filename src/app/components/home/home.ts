@@ -1,53 +1,106 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { IProducts, IProductsRes } from '../../models/products.model';
 import { environment } from '../../../environments/environments';
-import { CategoryService } from '../../services/category.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { max } from 'rxjs';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CommonModule,FormsModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrl: './home.css',
 })
 export class Home implements OnInit {
-  constructor(private _productsS: ProductsService , private _categoryS:CategoryService) { }
+  constructor(private _productsS: ProductsService, private _searchS: SearchService, private _route: ActivatedRoute) { }
 
-
+  currentCategory: string | null = null;
+  subCategories: { _id: string; name: string; description: string; parentCategory: string | null; route: string }[] = [];
   products!: IProducts[];
+  displayedProducts: IProducts[] = [];
   currentPage: number = 1;
   totalPages: number = 1;
   hasNextPage: boolean = false;
   hasPrevPage: boolean = false;
-  minPrice!:number;
-  maxPrice!:number;
-  lastMin:number = 0
-  lastMax:number = 0
+  minPrice!: number;
+  maxPrice!: number;
+  lastMin: number = 0
+  lastMax: number = 0
   staticUrl = environment.uploadsUrl;
 
-  ngOnInit(): void {
-    this.loadProducts(this.currentPage)
-  }
-
-  loadProducts(page: number ) {
-      this._productsS.getAllProducts(page).subscribe({
-        next: (res: IProductsRes) => {
+  onCategoryChange(route:string){
+    this._route.paramMap.subscribe(params =>{
+      const category = params.get('categoryRoute');
+      this.currentCategory = category
+      if (category) {
+        this._productsS.getAllProducts(1, category).subscribe(res => {
+          this.subCategories = res.subCategories || [];
           this.products = res.data.result
+          this.displayedProducts = this.products
           this.currentPage = res.data.page;
           this.totalPages = res.data.totalPages;
-          this.hasNextPage = res.data.hasNextPage
-          this.hasPrevPage = res.data.hasPrevPage
-        },
-        error: err => {
-          console.log('Error fetching products: ', err);
-          this.products = [];
-        }
-      })
+          this.hasNextPage = res.data.hasNextPage;
+          this.hasPrevPage = res.data.hasPrevPage;
+        })
+      }else {
+        this.loadProducts(this.currentPage)
+      }
+    })
   }
+
+  ngOnInit(): void {
+    this._route.paramMap.subscribe(param => {
+      const category = param.get('categoryRoute');
+      this.currentCategory = category
+      if (category) {
+        this._productsS.getAllProducts(1, category).subscribe(res => {
+          this.subCategories = res.subCategories || [];
+          this.products = res.data.result
+          this.displayedProducts = this.products
+          this.currentPage = res.data.page;
+          this.totalPages = res.data.totalPages;
+          this.hasNextPage = res.data.hasNextPage;
+          this.hasPrevPage = res.data.hasPrevPage;
+        })
+      }
+      else {
+        this.loadProducts(this.currentPage)
+      }
+    })
+
+
+    this._searchS.searchTerm$.subscribe(term => {
+      if (!this.products) return
+      if (term.trim() === '') {
+        this.displayedProducts = this.products;
+      } else {
+        this.displayedProducts = this.products.filter(p => p.name.toLowerCase().includes(term.toLocaleLowerCase()))
+      }
+    })
+  }
+
+  loadProducts(page: number) {
+    this._productsS.getAllProducts(page, this.currentCategory || undefined).subscribe({
+      next: (res: IProductsRes) => {
+        console.log('API Response:', res); // Debug: Log full response
+        console.log('SubCategories:', res.subCategories);
+        this.products = res.data.result
+        this.displayedProducts = this.products;
+        this.currentPage = res.data.page;
+        this.totalPages = res.data.totalPages;
+        this.hasNextPage = res.data.hasNextPage
+        this.hasPrevPage = res.data.hasPrevPage
+        this.subCategories = res.subCategories || [];
+      },
+      error: err => {
+        console.log('Error fetching products: ', err);
+        this.products = [];
+      }
+    })
+  }
+
 
   nextPage() {
     if (this.hasNextPage) {
@@ -62,20 +115,26 @@ export class Home implements OnInit {
   }
 
 
-  filterByPrice(minPrice:number,maxPrice:number,page: number = 1){
+  filterByPrice(minPrice: number, maxPrice: number, page: number = 1) {
     if (minPrice === 0 && maxPrice === 0) {
       this.loadProducts(this.currentPage)
     }
     this.lastMin = minPrice ? Number(minPrice) : 0;
     this.lastMax = maxPrice ? Number(maxPrice) : 0;
-    this._productsS.getProductsByPrice(this.lastMin,this.lastMax,page).subscribe({
-      next: (res) =>{
+    this._productsS.getProductsByPrice(this.lastMin, this.lastMax, page).subscribe({
+      next: (res) => {
+        console.log('Price Filter Response:', res); // Debug: Log response
+        console.log('SubCategories:', res.subCategories); //
         this.products = res.data.result;
+        this.displayedProducts = this.products
         this.currentPage = res.data.page;
         this.totalPages = res.data.totalPages;
       },
       error: (err) => console.log(err)
     })
+  }
+  getCategoryCheckboxId(): string {
+    return `cat-${this.currentCategory || 'default'}`;
   }
 }
 

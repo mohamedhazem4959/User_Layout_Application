@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
+import { SearchService } from '../../services/search.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
 export class Header {
-  constructor(private _categoryS:CategoryService){ }
+  searchValue: string ='';
+  constructor(private _searchS:SearchService){ }
 
-  productName:string='';
-  selectedCategory(route:string){ 
-    this._categoryS.setCategory(route)
+  onSearch(){
+    this._searchS.setSearchTerm(this.searchValue);
   }
+
 }
