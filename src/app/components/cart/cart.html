@@ -1,4 +1,4 @@
-<body class="cart-page">
+<!-- <body class="cart-page">
     <div class="cart-page__container">
         <table class="cart-table">
             <thead>
@@ -30,4 +30,39 @@
             <a class="cart-summary__button" routerLink="/order">Proceed to Order</a>
         </div>
     </div>
+</body> -->
+
+
+<body class="cart-page">
+  <div class="cart-page__container">
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th class="cart-table__header">Product Name</th>
+          <th class="cart-table__header">Price</th>
+          <th class="cart-table__header">Quantity</th>
+          <th class="cart-table__header">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cart-table__row" *ngFor="let item of cartItem">
+          <td class="cart-table__cell">{{ item.product.name }}</td>
+          <td class="cart-table__cell">{{ item.price | currency }}</td>
+          <td class="cart-table__cell">{{ item.quantity }}</td>
+          <td class="cart-table__cell">
+            <a class="cart-table__remove" (click)="removeItem(item.product._id); $event.preventDefault()">Remove</a>
+          </td>
+        </tr>
+        <tr *ngIf="!cartItem || cartItem.length === 0" class="cart-table__row">
+          <td colspan="4" class="cart-table__cell">Your cart is empty</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="cart-summary">
+      <p class="cart-summary__item">Total Quantity: {{ totalQuantity }}</p>
+      <p class="cart-summary__item">Total Price: {{ totalPrice | currency }}</p>
+      <a class="cart-summary__button" routerLink="/order" [class.disabled]="!cartItem || cartItem.length === 0" [routerLinkActive]="'active'">Proceed to Order</a>
+    </div>
+  </div>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 </body>

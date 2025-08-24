@@ -13,5 +13,6 @@ export class ProductService {
 
   getProductByRoute(route:string){
     return this._http.get<IProductRes>(`${this.url}/${route}`);
+    
   }
 }

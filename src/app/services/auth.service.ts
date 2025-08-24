@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpInterceptor } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
@@ -9,7 +9,7 @@ import {jwtDecode} from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService{
   constructor(private _http: HttpClient, private _router: Router) { }
 
   private isAuth = new BehaviorSubject<IUserData | null>(this.isLoggedin());
@@ -111,5 +111,8 @@ register(data:IRegister){
     return localStorage.getItem(this.token_key);
   }
 
+  public getAuthToken(): string | null {
+    return this.getToken();
+  }
 
 }

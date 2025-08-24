@@ -34,7 +34,7 @@
             <h2 class="product-detail__name">{{product.name}}</h2>
             <p class="product-detail__description">{{product.description}}</p>
             <p class="product-detail__price">EGP {{product.price}}</p>
-            <a class="product-detail__button" routerLink="/cart">Add to Cart</a>
+            <a class="product-detail__button" (click)="addToCart()">Add to Cart</a>
           </div>
         </div>
     }

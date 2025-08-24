@@ -24,5 +24,8 @@ export interface IUserData{
     id:string;
     role:string;
     name:string;
+    phoneNumber:string;
+    email:string;
+    shippingAddress:string;
     exp:number;
 }
