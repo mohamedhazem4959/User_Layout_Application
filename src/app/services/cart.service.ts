@@ -5,14 +5,16 @@ import { environment } from '../../environments/environments';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { IOrderRes } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  constructor(private _http:HttpClient , private _auth:AuthService, private _router:Router){ }
-  
-  cartURL = 'http://localhost:3000/api/cart'
+  constructor(private _http: HttpClient, private _auth: AuthService, private _router: Router) { }
+
+  cartURL = 'http://localhost:3000/api/cart';
+  orderURL = environment.apiUrl + '/order/addorder';
 
   getItemsInCart(): Observable<ICartRes> {
     const token = this._auth.getAuthToken();
@@ -37,11 +39,11 @@ export class CartService {
   }
 
 
-  addToCart(data:ICartItems):Observable<ICartRes>{
+  addToCart(data: ICartItems): Observable<ICartRes> {
     const token = this._auth.getAuthToken()
     if (!token) {
       this._router.navigate(['/login']);
-      return throwError(()=> new Error('User is not authenticated'))
+      return throwError(() => new Error('User is not authenticated'))
     }
 
     const headers = new HttpHeaders({
@@ -62,5 +64,65 @@ export class CartService {
       })
     )
 
+  }
+
+
+  updateQuantity(quantity: number, route: string): Observable<ICartRes> {
+    const token = this._auth.getAuthToken()
+    if (!token) {
+      this._router.navigate(['/login']);
+      return throwError(() => new Error('User is not authenticated'))
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    const payload = { quantity };
+    return this._http.put<ICartRes>(`${this.cartURL}/${route}`, payload, { headers }).pipe(
+      catchError(error => {
+        console.error('Full error: ', error);
+        return throwError(() => new Error('Faild to update quantity: ', error.message))
+      })
+    )
+  }
+
+  removeItem(route: string): Observable<ICartRes> {
+    const token = this._auth.getAuthToken()
+    if (!token) {
+      this._router.navigate(['/login']);
+      return throwError(() => new Error('User is not authenticated'))
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this._http.patch<ICartRes>(`${this.cartURL}/remove/${route}`, {}, { headers }).pipe(
+      catchError(error => {
+        console.error('Full error: ', error);
+        return throwError(() => new Error('Failed to remove item: ', error.message))
+      })
+    )
+  }
+
+  proceedToOrder(): Observable<ICartRes> {
+    const token = this._auth.getAuthToken()
+    if (!token) {
+      this._router.navigate(['/login']);
+      return throwError(() => new Error('User is not authenticated'))
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this._http.post<IOrderRes>(`${this.orderURL}`, {}, { headers }).pipe(
+      catchError(error => {
+        console.error('Full error: ', error);
+        return throwError(() => new Error('Faild to create order: ', error.message))
+      })
+    )
   }
 }

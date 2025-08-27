@@ -1,4 +1,4 @@
-body.cart-page {
+/* body.cart-page {
     font-family: sans-serif;
     background-color: #FFFFFF;
     color: #455A64;
@@ -63,4 +63,108 @@ body.cart-page {
 
 .cart-summary__button:hover {
     opacity: 0.9;
+} */
+
+
+body.cart-page {
+    font-family: sans-serif;
+    background-color: #FFFFFF;
+    color: #455A64;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-page__container {
+    max-width: 1200px;
+    margin: 22px auto;
+    padding: 20px;
+    background-color: #F7F7F7;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table__header {
+    background-color: #263238;
+    color: #FFFFFF;
+    padding: 10px;
+    text-align: left;
+}
+
+.cart-table__row {
+    border-bottom: 1px solid #B0BEC5;
+}
+
+.cart-table__cell {
+    padding: 10px;
+}
+
+.cart-table__remove {
+    color: #263238;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cart-table__remove:hover {
+    text-decoration: underline;
+}
+
+.cart-table__quantity {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #263238;
+    border-radius: 50%;
+    color: #263238;
+    text-decoration: none;
+    margin: 0 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.cart-table__quantity:hover {
+    background-color: #263238;
+    color: #FFFFFF;
+}
+
+.cart-summary {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.cart-summary__item {
+    color: #263238;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.cart-summary__button {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px; /* Added spacing between buttons */
+}
+
+.cart-summary__button.save {
+    background-color: #455A64; /* Different color for Save Quantity */
+    color: #FFFFFF;
+}
+
+.cart-summary__button.proceed {
+    background-color: #263238; /* Original color for Proceed to Order */
+    color: #FFFFFF;
+}
+
+.cart-summary__button:hover {
+    opacity: 0.9;
+}
+
+.cart-summary__button.disabled {
+    background-color: #B0BEC5;
+    cursor: not-allowed;
 }

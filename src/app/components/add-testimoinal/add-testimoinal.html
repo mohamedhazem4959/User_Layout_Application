@@ -1,0 +1,273 @@
+<!-- <html>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1 class="form-title">Share Your Experience</h1>
+            <p class="form-subtitle">We'd love to hear about your experience with us</p>
+        </div>
+
+        <form class="testimonial-form" method="POST" action="#">
+            <div class="form-note">
+                📝 Fill out the form below to share your testimonial with us
+            </div>
+
+            <div class="form-group">
+                <label for="userName" class="form-label">Your Name</label>
+                <input 
+                    type="text" 
+                    id="userName" 
+                    name="userName" 
+                    class="form-input" 
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="testimonialMessage" class="form-label">Your Message</label>
+                <textarea 
+                    id="testimonialMessage" 
+                    name="testimonialMessage" 
+                    class="form-input form-textarea" 
+                    placeholder="Share your experience with us... What did you like? How did we help you?"
+                    maxlength="500"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="rating-group">
+                <label class="rating-label">Rate Your Experience</label>
+                <div class="rating-options">
+                    <div class="rating-option">
+                        <input type="radio" id="rating5" name="rating" value="5" class="rating-input" required>
+                        <label for="rating5" class="rating-display">
+                            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                            <div class="rating-text">Excellent</div>
+                        </label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="rating4" name="rating" value="4" class="rating-input">
+                        <label for="rating4" class="rating-display">
+                            <div class="rating-stars">⭐⭐⭐⭐</div>
+                            <div class="rating-text">Very Good</div>
+                        </label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="rating3" name="rating" value="3" class="rating-input">
+                        <label for="rating3" class="rating-display">
+                            <div class="rating-stars">⭐⭐⭐</div>
+                            <div class="rating-text">Good</div>
+                        </label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="rating2" name="rating" value="2" class="rating-input">
+                        <label for="rating2" class="rating-display">
+                            <div class="rating-stars">⭐⭐</div>
+                            <div class="rating-text">Fair</div>
+                        </label>
+                    </div>
+                    <div class="rating-option">
+                        <input type="radio" id="rating1" name="rating" value="1" class="rating-input">
+                        <label for="rating1" class="rating-display">
+                            <div class="rating-stars">⭐</div>
+                            <div class="rating-text">Poor</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Submit Testimonial</button>
+                <button type="reset" class="btn btn-secondary">Clear Form</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html> -->
+
+
+
+<!-- <html>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1 class="form-title">Share Your Experience</h1>
+            <p class="form-subtitle">We'd love to hear about your experience with us</p>
+        </div>
+
+        <form class="testimonial-form" method="POST" action="#">
+            <div class="form-note">
+                📝 Fill out the form below to share your testimonial with us
+            </div>
+
+
+            <div class="form-group">
+                <label for="testimonialMessage" class="form-label">Your Message</label>
+                <textarea 
+                    id="testimonialMessage" 
+                    name="testimonialMessage" 
+                    class="form-input form-textarea" 
+                    placeholder="Share your experience with us... What did you like? How did we help you?"
+                    maxlength="500"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="rating" class="form-label">Rate Your Experience</label>
+                <select id="rating" name="rating" class="form-input" required>
+                    <option value="">-- Select Rating --</option>
+                    <option value="1 Star">⭐</option>
+                    <option value="2 Stars">⭐⭐</option>
+                    <option value="3 Stars">⭐⭐⭐</option>
+                    <option value="4 Stars">⭐⭐⭐⭐</option>
+                    <option value="5 Stars">⭐⭐⭐⭐⭐</option>
+                </select>
+            </div>
+
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Submit Testimonial</button>
+                <button type="reset" class="btn btn-secondary">Clear Form</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html> -->
+
+
+
+<!-- <div class="add-testimonial">
+  <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea 
+        id="message" 
+        formControlName="message" 
+        placeholder="Write your testimonial..."
+        rows="4">
+      </textarea>
+    </div>
+
+
+    <div class="form-group">
+      <label for="rating">Rating</label>
+      <select id="rating" formControlName="rating">
+        <option *ngFor="let star of starOptions" [value]="star.value">
+          {{ star.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" [disabled]="reactiveForm.invalid">Submit</button>
+    </div>
+  </form>
+</div> -->
+
+
+<!-- <div class="form-container">
+  <div class="form-header">
+    <h1 class="form-title">Share Your Experience</h1>
+    <p class="form-subtitle">We'd love to hear about your experience with us</p>
+  </div>
+
+  <form class="testimonial-form" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-note">
+      📝 Fill out the form below to share your testimonial with us
+    </div>
+
+    <div class="form-group">
+      <label for="testimonialMessage" class="form-label">Your Message</label>
+      <textarea
+        id="testimonialMessage"
+        name="testimonialMessage"
+        class="form-input form-textarea"
+        placeholder="Share your experience with us... What did you like? How did we help you?"
+        maxlength="500"
+        formControlName="message"
+        required
+      ></textarea>
+    </div>
+
+    <div class="rating-group">
+      <label class="rating-label">Rate Your Experience</label>
+      <div class="rating-options">
+        <div class="rating-option">
+          <select
+            id="rating"
+            name="rating"
+            class="form-input"
+            formControlName="rating"
+            required
+          >
+            <option value="">-- Select Rating --</option>
+            <option *ngFor="let s of starOptions" [value]="s.value">
+              {{ s.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="reactiveForm.invalid">Submit Testimonial</button>
+      <button type="reset" class="btn btn-secondary" (click)="reactiveForm.reset()">Clear Form</button>
+    </div>
+  </form>
+</div> -->
+
+<html>
+
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1 class="form-title">Share Your Experience</h1>
+            <p class="form-subtitle">We'd love to hear about your experience with us</p>
+        </div>
+
+        <form class="testimonial-form" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-note">
+                📝 Fill out the form below to share your testimonial with us
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+                <label for="testimonialMessage" class="form-label">Your Message</label>
+                <textarea id="testimonialMessage" name="testimonialMessage" class="form-input form-textarea"
+                    placeholder="Share your experience with us... What did you like? How did we help you?"
+                    maxlength="500" formControlName="message" required></textarea>
+            </div>
+
+            <!-- Rating (select, wrapped in rating-group structure for CSS compatibility) -->
+            <div class="rating-group">
+                <label for="rating" class="rating-label">Rate Your Experience</label>
+                <div class="rating-options">
+                    <div class="rating-option">
+                        <select id="rating" name="rating" class="form-input" formControlName="rating" required>
+                            <option value="">-- Select Rating --</option>
+                            <option *ngFor="let s of starOptions" [value]="s.value">
+                                {{ s.value }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" [disabled]="reactiveForm.invalid">
+                    Submit Testimonial
+                </button>
+                <button type="reset" class="btn btn-secondary" (click)="reactiveForm.reset()">
+                    Clear Form
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

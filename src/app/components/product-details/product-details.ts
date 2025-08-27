@@ -3,13 +3,13 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IProduct } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { environment } from '../../../environments/environments';
-import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { ICartItems } from '../../models/cart.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
-  imports: [RouterLink],
+  imports: [RouterLink,CommonModule],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css'
 })
@@ -21,7 +21,8 @@ export class ProductDetails implements OnInit {
   cartItem: ICartItems | null = null;
   route!: string;
   staticUrl = environment.uploadsUrl + '/';
-  errorMessage: string | null = null
+  errorMessage: string | null = null;
+  successMessage: string | null = null;
 
   ngOnInit(): void {
     this._activeRoute.paramMap.subscribe(param => {
@@ -54,9 +55,13 @@ export class ProductDetails implements OnInit {
     }
     this._cartS.addToCart(this.cartItem).subscribe({
       next: res => {
+        this.successMessage = 'Product Added To Cart'
         console.log('Added to cart: ', res);
       },
-      error: err => console.error(err)
+      error: err => {
+        console.error(err)
+        this.errorMessage = 'Error adding product into cart'
+      }
     })
   }
 }

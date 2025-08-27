@@ -84,7 +84,7 @@ export class Home implements OnInit {
   loadProducts(page: number) {
     this._productsS.getAllProducts(page, this.currentCategory || undefined).subscribe({
       next: (res: IProductsRes) => {
-        console.log('API Response:', res); // Debug: Log full response
+        console.log('API Response:', res); 
         console.log('SubCategories:', res.subCategories);
         this.products = res.data.result
         this.displayedProducts = this.products;

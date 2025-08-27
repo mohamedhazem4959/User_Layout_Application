@@ -13,7 +13,7 @@ export class ProductsService {
 
   private url = environment.apiUrl + '/product' + '/products';
   private Base_URL = environment.apiUrl;
-
+  
   getAllProducts(page: number = 1, categoryRoute?: string): Observable<IProductsRes> {
     if (categoryRoute) {
       return this._http.get<IProductsRes>(`${this.Base_URL}/product/filterd/category/${categoryRoute}?page=${page}`)

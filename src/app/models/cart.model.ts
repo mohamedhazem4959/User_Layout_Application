@@ -18,6 +18,7 @@ export interface ICartItemResponse {
         _id: string;
         name: string;
         price: number;
+        route:string
     };
     quantity: number;
     price: number;
@@ -28,5 +29,6 @@ export interface ICartRes {
     data: {
         user: IUserData,
         items: ICartItemResponse[],
+        _id:string;
     }
 }

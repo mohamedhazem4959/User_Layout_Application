@@ -18,19 +18,19 @@ export class Login {
   loginForm = new FormGroup({
     email: new FormControl<string>('', [
       Validators.required,
-      Validators.email // Ensures valid email format
+      Validators.email
     ]),
     password: new FormControl<string>('', [
       Validators.required,
-      Validators.minLength(6) // Example: minimum 6 characters
+      Validators.minLength(6)
     ])
   });
 
-  // Object to store backend error messages
+ 
   serverErrors: { email?: string; password?: string; general?: string } = {};
 
   onSubmit() {
-    this.serverErrors = {}; // Reset server errors
+    this.serverErrors = {}; 
     if (this.loginForm.valid) {
       const myValue: ILogin = this.loginForm.value as ILogin;
       this._authS.login(myValue).subscribe({
@@ -40,25 +40,24 @@ export class Login {
         },
         error: (err) => {
           console.error('Login failed:', err);
-          // Handle specific backend error messages
+
           const errorMessage = err.error?.message || err.message || 'Login failed. Please try again.';
           if (errorMessage.toLowerCase().includes('email')) {
-            this.serverErrors.email = errorMessage; // e.g., "Invalid email"
+            this.serverErrors.email = errorMessage; 
           } else if (errorMessage.toLowerCase().includes('password')) {
-            this.serverErrors.password = errorMessage; // e.g., "Invalid password"
+            this.serverErrors.password = errorMessage; 
           } else {
-            this.serverErrors.general = errorMessage; // General error
+            this.serverErrors.general = errorMessage; 
           }
         }
       });
     } else {
       this.serverErrors.general = 'Please fill in all required fields correctly.';
-      // Mark all fields as touched to show validation errors
+ 
       this.loginForm.markAllAsTouched();
     }
   }
 
-  // Helper methods to check field errors
   getEmailError(): string {
   const emailControl = this.loginForm.get('email');
   if (emailControl?.touched) {
