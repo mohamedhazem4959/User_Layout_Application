@@ -44,6 +44,9 @@
             <div class="product-grid__item">
               <img [src]="staticUrl + '/' + product.image" alt="{{ product.name }}" class="product-grid__image">
               <h4 class="product-grid__name">{{ product.name }}</h4>
+              @if (product.stock <= 3) {
+                <p class="product-grid__name" style="color:red;"> Last {{ product.stock }} pieces</p>
+              }
               <p class="product-grid__price">Price: {{ product.price }}</p>
               <a class="view-details" [routerLink]="['/product-details', product.route]">View Details</a>
             </div>

@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ICartRes } from '../../models/cart.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-order',
@@ -19,12 +20,24 @@ export class Order implements OnInit {
   
   errorMessage: string | null = null;
   orderId: string | null = null
-  constructor(private _orderS: OrderService, private _route: ActivatedRoute) { }
+  constructor(private _orderS: OrderService, private _route: ActivatedRoute, private _userS:UserService) { }
 
   product: IProduct | null = null;
   ngOnInit(): void {
     this.orderId = this._route.snapshot.paramMap.get('id');
     console.log('OrderID: ', this.orderId)
+    this._userS.getUser().subscribe({
+      next: res =>{
+        console.log('res:')
+        console.log(res)
+        this.shippingAdress = res.data.shippingAddress;
+        console.log(this.shippingAdress);
+        
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
 
       this._orderS.getCartItems().subscribe({
         next: (res: ICartRes) => {

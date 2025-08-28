@@ -29,3 +29,7 @@ export interface IUserData{
     shippingAddress:string;
     exp:number;
 }
+export interface IUserDataRes{
+    msg:string;
+    data:IUserData
+}

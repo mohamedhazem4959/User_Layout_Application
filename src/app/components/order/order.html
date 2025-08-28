@@ -43,7 +43,7 @@
     <div class="order-page__container">
         <form class="order-form">
             <h2 class="order-form__title">Shipping Address</h2>
-            <input type="text" class="order-form__input" placeholder="Address" [(ngModel)]="shippingAdress"
+            <input type="text" class="order-form__input" [value]="shippingAdress" placeholder="Address" [(ngModel)]="shippingAdress"
                 name="shippingAdress">
         </form>
 
