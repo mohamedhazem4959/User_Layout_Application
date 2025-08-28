@@ -5,6 +5,7 @@ import { IProduct } from '../../models/product';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ICartRes } from '../../models/cart.model';
 
 @Component({
   selector: 'app-order',
@@ -14,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class Order implements OnInit {
   orderItem: IOrderItemsResponse[] | null = null;
+
+  
   errorMessage: string | null = null;
   orderId: string | null = null
   constructor(private _orderS: OrderService, private _route: ActivatedRoute) { }
@@ -23,9 +26,8 @@ export class Order implements OnInit {
     this.orderId = this._route.snapshot.paramMap.get('id');
     console.log('OrderID: ', this.orderId)
 
-    if (this.orderId) {
-      this._orderS.getOrderedItems(this.orderId).subscribe({
-        next: (res: IOrderRes) => {
+      this._orderS.getCartItems().subscribe({
+        next: (res: ICartRes) => {
           this.orderItem = res.data.items;
           console.log('Order Items: ', this.orderItem);
         },
@@ -34,10 +36,6 @@ export class Order implements OnInit {
           console.log('Error fetching items: ', err);
         }
       })
-    }
-    else {
-      console.log('order id is not found');
-    }
   }
 
   getOrderIdFn(orderId: string) {

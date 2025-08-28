@@ -19,7 +19,17 @@
             <input type="text" class="search-input" placeholder="Search products..." [(ngModel)]="searchValue">
             <button class="search-btn" (click)="onSearch()">Search</button>
         </div>
-        <a class="header__link" href="/login">Sign in</a>
+        <div *ngIf="!signIn()">
+            <button class="header__auth-btn">
+                <a routerLink="/login">Sign in</a>
+            </button>
+        </div>
+        <div *ngIf="signIn()">
+            <button class="header__auth-btn_out" (click)="logOut()">
+                <a routerLink="/">Sign out</a>
+            </button>
+        </div>
+
         <a class="header__cart" href="/cart">🛒</a>
     </nav>
 </header>

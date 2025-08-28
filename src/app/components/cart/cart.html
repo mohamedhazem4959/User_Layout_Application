@@ -1,42 +1,6 @@
-<!-- <body class="cart-page">
-  <div class="cart-page__container">
-    <table class="cart-table">
-      <thead>
-        <tr>
-          <th class="cart-table__header">Product Name</th>
-          <th class="cart-table__header">Price</th>
-          <th class="cart-table__header">Quantity</th>
-          <th class="cart-table__header">Remove</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="cart-table__row" *ngFor="let item of cartItem">
-          <td class="cart-table__cell">{{ item.product.name }}</td>
-          <td class="cart-table__cell">{{ item.price | currency }}</td>
-
-          <td class="cart-table__cell">{{ item.quantity }}</td>
-
-          <td class="cart-table__cell">
-            <a class="cart-table__remove" (click)="removeItem(item.product._id); $event.preventDefault()">Remove</a>
-          </td>
-        </tr>
-        <tr *ngIf="!cartItem || cartItem.length === 0" class="cart-table__row">
-          <td colspan="4" class="cart-table__cell">Your cart is empty</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="cart-summary">
-      <p class="cart-summary__item">Total Quantity: {{ totalQuantity }}</p>
-      <p class="cart-summary__item">Total Price: {{ totalPrice | currency }}</p>
-      <a class="cart-summary__button" routerLink="/order" [class.disabled]="!cartItem || cartItem.length === 0" [routerLinkActive]="'active'">Proceed to Order</a>
-    </div>
-  </div>
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-</body> -->
-
-
 <body class="cart-page">
   <div class="cart-page__container">
+
     <table class="cart-table">
       <thead>
         <tr>
@@ -47,29 +11,61 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="cart-table__row" *ngFor="let item of cartItem">
-          <td class="cart-table__cell">{{ item.product.name }}</td>
-          <td class="cart-table__cell">{{ item.price | currency }}</td>
-          <td class="cart-table__cell">
-            <a class="cart-table__quantity" (click)="updateQuantityBtn('minBtn',item.product.route,item.quantity,item.product._id)">-</a>
-            {{ item.quantity }}
-            <a class="cart-table__quantity" (click)="updateQuantityBtn('addBtn',item.product.route,item.quantity,item.product._id)">+</a>
-          </td>
-          <td class="cart-table__cell">
-            <a class="cart-table__remove" (click)="removeItem(item.product.route)">Remove</a>
-          </td>
-        </tr>
+        <ng-container *ngFor="let item of cartItem; let i = index">
+          <tr class="cart-table__row">
+            <td class="cart-table__cell">{{ item.product.name }}</td>
+            <td class="cart-table__cell">{{ item.price | currency }}</td>
+            <td class="cart-table__cell">
+              <a class="cart-table__quantity"
+                (click)="updateQuantityBtn('minBtn', item.product.route, item.quantity, item.product._id)">-</a>
+              {{ item.quantity }}
+              <a class="cart-table__quantity"
+                (click)="updateQuantityBtn('addBtn', item.product.route, item.quantity, item.product._id)">+</a>
+            </td>
+            <td class="cart-table__cell">
+              <a class="cart-table__remove"
+                (click)="removeItem(item.product.route); $event.preventDefault()">Remove</a>
+            </td>
+          </tr>
+
+          <!-- Warning row shown only when price changed -->
+          <tr *ngIf="item.isChanged" class="cart-table__row cart-warning-row">
+            <td colspan="4" class="cart-table__cell">
+              <div class="cart-warning">
+                <p>
+                  <strong>Warning!</strong>
+                  Product price<em>{{ item.product.name }}</em> is changed
+                  <span class="old-price">{{ item.price | currency }}</span>
+                  to
+                  <span class="new-price">{{ item.product.price | currency }}</span>.
+                </p>
+                <div class="cart-warning__actions">
+                  <button type="button" class="btn btn-accept"
+                    (click)="acceptNewPrice(item); $event.preventDefault()">Continue with the new price ?</button>
+                  <button type="button" class="btn btn-remove"
+                    (click)="removeItem(item.product.route); $event.preventDefault()">Remove product</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+
+        <!-- Empty cart fallback -->
         <tr *ngIf="!cartItem || cartItem.length === 0" class="cart-table__row">
-          <td colspan="4" class="cart-table__cell">Your cart is empty</td>
+          <td colspan="4" class="cart-table__cell cart-empty">Your cart is empty</td>
         </tr>
       </tbody>
     </table>
+
     <div class="cart-summary">
       <p class="cart-summary__item">Total Quantity: {{ totalQuantity }}</p>
       <p class="cart-summary__item">Total Price: {{ totalPrice | currency }}</p>
-      
-      <a class="cart-summary__button proceed"  [class.disabled]="!cartItem || cartItem.length === 0" [routerLinkActive]="'active'" (click)="proceedToOrder();">Proceed to Order</a>
+      <a class="cart-summary__button proceed" 
+         [class.disabled]="!cartItem || cartItem.length === 0"
+         [routerLinkActive]="'active'" routerLink="/order">Proceed to Order</a>
     </div>
+
   </div>
+
   <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 </body>

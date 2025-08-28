@@ -22,6 +22,7 @@ export interface ICartItemResponse {
     };
     quantity: number;
     price: number;
+    isChanged?:boolean;
 }
 
 export interface ICartRes {

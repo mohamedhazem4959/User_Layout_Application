@@ -14,7 +14,7 @@ import { Faq } from './components/faq/faq';
 
 export const routes: Routes = [
     {path: '' , component:Home},
-    {path:'order/:id' , component:Order,canActivate:[authGuardGuard]},
+    {path:'order' , component:Order,canActivate:[authGuardGuard]}, // /order/:id
     {path:'product-details/:route' , component:ProductDetails},
     {path:'cart' , component:Cart , canActivate:[authGuardGuard]},
     {path:'login' , component:Login},

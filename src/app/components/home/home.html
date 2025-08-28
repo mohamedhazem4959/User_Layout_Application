@@ -39,7 +39,7 @@
 
     <main class="home-page__main">
       <div class="product-grid">
-        @if (displayedProducts?.length) {
+        @if (displayedProducts && displayedProducts.length) {
           @for (product of displayedProducts; track product._id) {
             <div class="product-grid__item">
               <img [src]="staticUrl + '/' + product.image" alt="{{ product.name }}" class="product-grid__image">

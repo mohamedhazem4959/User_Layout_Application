@@ -13,6 +13,8 @@ import { IProduct } from '../../models/product';
 })
 export class Cart implements OnInit {
   cartItem: ICartItemResponse[] | null = null;
+
+
   errorMessage: string | null = null;
   successMessage: string | null = null;
   constructor(private _cartS: CartService, private _router:Router) { }
@@ -110,7 +112,18 @@ orderId = {}
     })
   }
 
-
+acceptNewPrice(item: ICartItemResponse) {
+  item.price = item.product.price;
+  item.isChanged = false;
+  this._cartS.updatedPrice(item.product.name, item.product.price).subscribe({
+    next: res => {
+      console.log(res);
+    },
+    error: err => {
+      console.log(err)
+    }
+  })
+}
 
 
 
