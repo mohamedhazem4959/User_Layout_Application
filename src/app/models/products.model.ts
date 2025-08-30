@@ -10,6 +10,7 @@ export interface IProducts {
         description: string;
         parentCategory: string | null;
         route: string;
+<<<<<<< HEAD
         subcategories: {
             _id: string;
             name: string;
@@ -18,6 +19,8 @@ export interface IProducts {
             route: string;
             products?: IProducts[];
         }[];
+=======
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58
     };
     image: string;
     isDeleted: boolean;
@@ -46,4 +49,8 @@ export interface IProductsRes {
         parentCategory: string | null;
         route: string
     }[];
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58

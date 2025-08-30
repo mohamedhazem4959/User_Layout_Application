@@ -30,22 +30,36 @@ export class Home implements OnInit {
   lastMax: number = 0
   staticUrl = environment.uploadsUrl;
 
+<<<<<<< HEAD
   onCategoryChange(route: string) {
     this._route.paramMap.subscribe(params => {
+=======
+  onCategoryChange(route:string){
+    this._route.paramMap.subscribe(params =>{
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58
       const category = params.get('categoryRoute');
       this.currentCategory = category
       if (category) {
         this._productsS.getAllProducts(1, category).subscribe(res => {
+<<<<<<< HEAD
           // Get subcategories from the first product's category.subcategories
           this.subCategories = res.data.result.length > 0 ? res.data.result[0].category.subcategories || [] : [];
           this.products = this.mergeProductsFromSubcategories(res);
+=======
+          this.subCategories = res.subCategories || [];
+          this.products = res.data.result
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58
           this.displayedProducts = this.products
           this.currentPage = res.data.page;
           this.totalPages = res.data.totalPages;
           this.hasNextPage = res.data.hasNextPage;
           this.hasPrevPage = res.data.hasPrevPage;
         })
+<<<<<<< HEAD
       } else {
+=======
+      }else {
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58
         this.loadProducts(this.currentPage)
       }
     })
@@ -57,9 +71,14 @@ export class Home implements OnInit {
       this.currentCategory = category
       if (category) {
         this._productsS.getAllProducts(1, category).subscribe(res => {
+<<<<<<< HEAD
           // Get subcategories from the first product's category.subcategories
           this.subCategories = res.data.result.length > 0 ? res.data.result[0].category.subcategories || [] : [];
           this.products = this.mergeProductsFromSubcategories(res);
+=======
+          this.subCategories = res.subCategories || [];
+          this.products = res.data.result
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58
           this.displayedProducts = this.products
           this.currentPage = res.data.page;
           this.totalPages = res.data.totalPages;
@@ -86,16 +105,26 @@ export class Home implements OnInit {
   loadProducts(page: number) {
     this._productsS.getAllProducts(page, this.currentCategory || undefined).subscribe({
       next: (res: IProductsRes) => {
+<<<<<<< HEAD
         console.log('API Response:', res);
         console.log('SubCategories:', res.subCategories);
         this.products = this.mergeProductsFromSubcategories(res);
+=======
+        console.log('API Response:', res); 
+        console.log('SubCategories:', res.subCategories);
+        this.products = res.data.result
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58
         this.displayedProducts = this.products;
         this.currentPage = res.data.page;
         this.totalPages = res.data.totalPages;
         this.hasNextPage = res.data.hasNextPage
         this.hasPrevPage = res.data.hasPrevPage
+<<<<<<< HEAD
         // Get subcategories from the first product's category.subcategories
         this.subCategories = res.data.result.length > 0 ? res.data.result[0].category.subcategories || [] : [];
+=======
+        this.subCategories = res.subCategories || [];
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58
       },
       error: err => {
         console.log('Error fetching products: ', err);
@@ -139,6 +168,7 @@ export class Home implements OnInit {
   getCategoryCheckboxId(): string {
     return `cat-${this.currentCategory || 'default'}`;
   }
+<<<<<<< HEAD
 
   private mergeProductsFromSubcategories(res: IProductsRes): IProducts[] {
     let mergedProducts = [...res.data.result];
@@ -162,6 +192,8 @@ export class Home implements OnInit {
     
     return Array.from(uniqueProductsMap.values());
   }
+=======
+>>>>>>> 8487913880c2a68ee95c5a1caa0f1de125245b58
 }
 
 
