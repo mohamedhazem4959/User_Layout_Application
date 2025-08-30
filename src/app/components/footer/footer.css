@@ -1,0 +1,33 @@
+.footer {
+    background-color: #F7F7F7;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #E0E0E0;
+}
+
+.footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer__link-item {
+    display: inline;
+}
+
+.footer__link {
+    color: #263238;
+    text-decoration: none;
+}
+
+.footer__link:hover {
+    text-decoration: underline;
+}
+
+.footer__copyright {
+    color: #B0BEC5;
+    margin: 0;
+}

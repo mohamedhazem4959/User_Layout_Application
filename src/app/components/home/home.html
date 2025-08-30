@@ -1,0 +1,65 @@
+<body class="home-page">
+  <div class="home-page__container">
+    <aside class="home-page__sidebar">
+      <ul class="categories">
+        @if (currentCategory) {
+          <li class="categories__item">
+            <h2 class="category-header">{{ currentCategory }} categories</h2>
+            <input
+              type="checkbox"
+              class="categories__toggle"
+              [id]="getCategoryCheckboxId()"
+            >
+            <label
+              class="categories__label"
+              [for]="getCategoryCheckboxId()"
+            >
+              {{currentCategory}}
+            </label>
+            @if (subCategories.length) {
+              <ul class="categories__sub">
+                @for (sub of subCategories; track sub._id) {
+                  <a class="categories__sub-item" [routerLink]="['/category', sub.route]">{{ sub.name }}</a>
+                }
+              </ul>
+            } 
+          </li>
+        } @else {
+          <p class="Home-side">Home</p>
+        }
+      </ul>
+
+      <form class="filter-card">
+        <h3 class="filter-card__title">Filters</h3>
+        <input type="number" class="filter-card__input" #min placeholder="Min Price">
+        <input type="number" class="filter-card__input" #max placeholder="Max Price">
+        <button type="button" class="filter-card__button" (click)="filterByPrice(+min.value, +max.value)">Filter</button>
+      </form>
+    </aside>
+
+    <main class="home-page__main">
+      <div class="product-grid">
+        @if (displayedProducts && displayedProducts.length) {
+          @for (product of displayedProducts; track product._id) {
+            <div class="product-grid__item">
+              <img [src]="staticUrl + '/' + product.image" alt="{{ product.name }}" class="product-grid__image">
+              <h4 class="product-grid__name">{{ product.name }}</h4>
+              @if (product.stock <= 3) {
+                <p class="product-grid__name" style="color:red;"> Last {{ product.stock }} pieces</p>
+              }
+              <p class="product-grid__price">Price: {{ product.price }}</p>
+              <a class="view-details" [routerLink]="['/product-details', product.route]">View Details</a>
+            </div>
+          }
+        } @else {
+          <p>No products found.</p>
+        }
+      </div>
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button class="pagination__button" [disabled]="!hasPrevPage" (click)="prevPage()">Previous</button>
+        <!-- <span class="page">Page {{ currentPage }} of {{ totalPages }}</span> -->
+        <button class="pagination__button" [disabled]="!hasNextPage" (click)="nextPage()">Next</button>
+      </div>
+    </main>
+  </div>
+</body>

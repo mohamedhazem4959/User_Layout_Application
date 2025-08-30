@@ -1,0 +1,53 @@
+
+<body class="order-page">
+    <div class="order-page__container">
+        <form class="order-form">
+            <h2 class="order-form__title">Shipping Address</h2>
+            <input type="text" class="order-form__input" [value]="shippingAdress" placeholder="Address" [(ngModel)]="shippingAdress"
+                name="shippingAdress">
+        </form>
+
+        <div class="payment-method">
+            <h3 class="payment-method__title">Payment Method</h3>
+            <label class="payment-method__option">
+                <input type="radio" checked /> Cash on Delivery
+            </label>
+        </div>
+
+        <table class="order-summary" *ngIf="orderItem && orderItem.length > 0; else noData">
+            <thead>
+                <tr>
+                    <th class="order-summary__header">Product Name</th>
+                    <th class="order-summary__header">Price</th>
+                    <th class="order-summary__header">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="order-summary__row" *ngFor="let item of orderItem">
+                    <td class="order-summary__cell">{{ item.product.name }}</td>
+                    <td class="order-summary__cell">{{ item.price }}</td>
+                    <td class="order-summary__cell">{{ item.quantity }}</td>
+                </tr>
+                <tr class="order-summary__row total-row">
+                    <td class="order-summary__cell"><strong>Total</strong></td>
+                    <td class="order-summary__cell"><strong>{{ totalPrice }}</strong></td>
+                    <td class="order-summary__cell"><strong>{{ totalQuantity }}</strong></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <ng-template #noData>
+            <p class="order-summary__empty">No items found for this order.</p>
+        </ng-template>
+
+
+        <div *ngIf="successMessage" class="alert alert-success">
+            {{successMessage}}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-error">
+            {{errorMessage}}
+        </div>
+        <button type= "button"class="order-page__button" (click)="placeOrder()">Place Order</button>
+    </div>
+</body>

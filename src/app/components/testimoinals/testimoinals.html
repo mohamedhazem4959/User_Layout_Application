@@ -1,0 +1,34 @@
+<body>
+<div class="testimonials-container">
+  <div class="testimonials-header">
+    <h1 class="testimonials-title">Customer Testimonials</h1>
+    <p class="testimonials-subtitle">What our amazing customers are saying about us</p>
+  </div>
+
+  <!-- Loop over testimonials -->
+  <div class="testimonials-grid">
+    <div class="testimonial-card" *ngFor="let t of testiminals">
+      <div class="user-name">{{ t.user.name | titlecase}}</div>
+
+      <div class="testimonial-message">
+        {{ t.message }}
+      </div>
+
+      <div class="rating">
+        <div class="stars">
+          <!-- Simple star rendering -->
+          {{ t.rating }}
+        </div>
+      </div>
+
+      <div class="testimonial-date">
+        {{ t.createdAt | date:'MMMM d, y' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="add-testimonial-section">
+    <button class="add-testimonial-btn" routerLink="/addTestimoinal">Add Your Testimonial</button>
+  </div>
+</div>
+</body>

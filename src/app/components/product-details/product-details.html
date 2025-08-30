@@ -1,0 +1,46 @@
+<!-- 
+<body class="product-detail-page">
+    <div class="product-detail-page__container">
+        @if (product) {
+            <div class="product-detail">
+                <img class="product-detail__image" [src]="staticUrl + '/' + product.image" alt="Product Image">
+                <div class="product-detail__info">
+                    <h2 class="product-detail__name">{{product.name}}</h2>
+                    <p class="product-detail__description">{{product.description}}</p>
+                    <p class="product-detail__price">{{product.price}}</p>
+                    <button class="product-detail__button">Add to Cart</button>
+                </div>
+            </div>
+        }
+    </div>
+</body> -->
+
+
+<body class="product-detail-page">
+  <div class="product-detail-page__container">
+    @if (product) {
+    <div class="product-detail">
+
+      <!-- Left: Product Image -->
+      <div class="product-detail__image-container">
+        <img class="product-detail__image" [src]="staticUrl + '/' + product.image" alt="{{product.name}}">
+      </div>
+
+      <!-- Right: Product Info -->
+      <div class="product-detail__info">
+        <h2 class="product-detail__name">{{product.name}}</h2>
+        <p class="product-detail__description">{{product.description}}</p>
+        <p class="product-detail__price">EGP {{product.price}}</p>
+
+        <a class="product-detail__button" (click)="addToCart()">Add to Cart</a>
+                <div *ngIf="successMessage" class="alert alert-success">
+          {{successMessage}}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-error">
+          {{errorMessage}}
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</body>
